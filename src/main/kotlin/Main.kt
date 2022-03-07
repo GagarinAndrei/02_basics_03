@@ -10,23 +10,18 @@ fun main() {
     print("Number of goods: ")
     val numberOfGoods = readln().toInt()
 
-    val finalPrice = discountCalc(numberOfGoods, previousPurchases, isRegularClient)
+    val finalPrice = discountCalc(numberOfGoods, previousPurchases)
 
-    if (isRegularClient) {
-        println(
-            "Product amount: $finalPrice\n" +
-                    "With 1% discount: ${finalPrice * 99 / 100}"
-        )
-    } else {
-        println("Product amount: $finalPrice")
-    }
+    println("Product amount: $finalPrice")
+    if (isRegularClient) println("With 1% discount: ${finalPrice * 99 / 100}")
 }
 
-fun discountCalc(numberOfGoods: Int, previousPurchases: Int, isRegularClient: Boolean): Int {
+
+fun discountCalc(numberOfGoods: Int, previousPurchases: Int): Int {
     var productAmount = numberOfGoods * PRICE
 
     if (previousPurchases in 1001..10000) {
-        productAmount = numberOfGoods * (PRICE - 100)
+        productAmount = numberOfGoods * PRICE - 100
     } else if (previousPurchases >= 10001) {
         productAmount = productAmount * 95 / 100
     }
